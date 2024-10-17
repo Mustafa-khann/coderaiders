@@ -309,6 +309,9 @@ body {
   max-width: 80%;
   margin: 0 auto;
   box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .message-header, .message-footer {
@@ -322,4 +325,10 @@ body {
   font-size: 1rem;
   word-break: break-all;
   line-height: 1.5;
+}
+
+.copy-button {
+  margin-top: 20px;
+  font-size: 1rem;
+  padding: 5px 10px;
 }

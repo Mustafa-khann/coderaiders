@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [showFinalDestination, setShowFinalDestination] = useState(false);
   const [glitchText, setGlitchText] = useState('DATA PHANTOMS');
+  const [copySuccess, setCopySuccess] = useState('');
 
   const handleShowFinalDestination = () => {
     setShowFinalDestination(true);
@@ -14,7 +15,7 @@ function App() {
       const glitchChance = Math.random();
       if (glitchChance > 0.7) {
         setGlitchText('C0D3 R4ID3RS');
-        setTimeout(() => setGlitchText('C0D3 R4ID3RS'), 200);
+        setTimeout(() => setGlitchText('DATA PHANTOMS'), 200);
       }
     }, 2000);
 
@@ -22,6 +23,16 @@ function App() {
   }, []);
 
   const encodedMessage = "Q29uZ3JhdHVsYXRpb25zLCBDb2RlIFJhaWRlcnMhIFlvdeKAmXZlIGNyYWNrZWQgdGhlIGNvZGUgYW5kIHJldmVhbGVkIHRoZSBzZWNyZXQ6ICdJbiB0aGUgcmVhbG0gb2YgY29kZSwgY3JlYXRpdml0eSBpZ25pdGVzIGlubm92YXRpb24uJyBZb3VyIHJlbGVudGxlc3MgcHVyc3VpdCBvZiBrbm93bGVkZ2UgYW5kIHlvdXIgYWJpbGl0eSB0byBuYXZpZ2F0ZSB0aHJvdWdoIGNoYWxsZW5nZXMgaGF2ZSBsZWQgeW91IHRvIHRoaXMgdHJpdW1waC4gS2VlcCByYWlkaW5nIHRoZSByZWFsbXMgb2YgcG9zc2liaWxpdHkgYW5kIGNvbnRpbnVlIHRvIGlubm92YXRlIQ==";
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(encodedMessage);
+      setCopySuccess('Copied!');
+      setTimeout(() => setCopySuccess(''), 2000);
+    } catch (err) {
+      setCopySuccess('Failed to copy');
+    }
+  };
 
   return (
     <div className="App">
@@ -37,6 +48,9 @@ function App() {
       ) : (
         <div className="encoded-message">
           <p className="message-body">{encodedMessage}</p>
+          <button className="cyberpunk-button copy-button" onClick={copyToClipboard}>
+            {copySuccess || 'Copy Message'}
+          </button>
         </div>
       )}
     </div>
